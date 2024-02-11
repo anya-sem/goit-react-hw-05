@@ -79,7 +79,7 @@ export const getCast = async (movieId) => {
   }
 };
 
-export const getSearch = async (query) => {
+export const getSearchResults = async (query) => {
   const url = "/search/movie";
 
   const options = {
