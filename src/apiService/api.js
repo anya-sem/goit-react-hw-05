@@ -62,6 +62,23 @@ export const getReviews = async (movieId) => {
   }
 };
 
+export const getCast = async (movieId) => {
+  const url = `/movie/${movieId}/credits`;
+  const options = {
+    params: {
+      language: "en-US",
+    },
+  };
+
+  try {
+    const response = await instance.get(url, options);
+    return response.data;
+  } catch (error) {
+    console.error("This didn't work.");
+    throw error;
+  }
+};
+
 export const getSearch = async (query) => {
   const url = "/search/movie";
 
