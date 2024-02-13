@@ -25,6 +25,10 @@ export default function MovieCast() {
     }
     fetchData();
   }, [movieId]);
+
+  const defaultImg =
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
+
   return (
     <div>
       {isLoading && <Loader />}
@@ -34,13 +38,19 @@ export default function MovieCast() {
         <div>
           {cast && cast.length > 0 ? (
             <ul>
-              {cast.map(({ id, name, profile_path }) => (
+              {cast.map(({ id, name, profile_path, character }) => (
                 <li key={id}>
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                    src={
+                      profile_path
+                        ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                        : defaultImg
+                    }
                     alt={name}
+                    width={150}
                   />
                   <p>{name}</p>
+                  <p>as {character}</p>
                 </li>
               ))}
             </ul>
