@@ -1,29 +1,7 @@
-// import css from "./Search.module.css";
-import toast from "react-hot-toast";
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-
-export default function Search({ onSubmit }) {
-  const [query, setQuery] = useState("");
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("query") ?? "";
-
-  const handleChange = (newQuery) => {
-    setQuery(newQuery);
-    searchParams.set("query", newQuery);
-    setSearchParams(searchParams);
-  };
-
+export default function Search({ query, onSubmit, onChange }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!query.trim()) {
-      toast.error("Please, enter your request");
-      return;
-    }
-    onSubmit(query);
-    setSearchParams({ query: query });
-    setQuery("");
+    onSubmit();
   };
 
   return (
@@ -37,7 +15,7 @@ export default function Search({ onSubmit }) {
             placeholder="Search movie"
             name="query"
             value={query}
-            onChange={(evt) => handleChange(evt.target.value)}
+            onChange={(evt) => onChange(evt.target.value)}
           />
           <button type="submit">Search</button>
         </form>

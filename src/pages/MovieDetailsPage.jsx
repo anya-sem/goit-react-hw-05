@@ -1,6 +1,6 @@
 import MovieCard from "../components/MovieCard/MovieCard";
 import Loader from "../components/Loader/Loader";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMovieById, getReviews } from "../apiService/api";
 import { useParams, Outlet, useLocation } from "react-router-dom";
 import AdditionalInfo from "../components/AdditionalInfo/AdditionalInfo";
@@ -13,7 +13,7 @@ export default function MovieDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/";
+  const backLink = useRef(location.state?.from) ?? "/";
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,7 +36,7 @@ export default function MovieDetailsPage() {
 
   return (
     <div>
-      <GoBackButton location={location} backLinkHref={backLinkHref} />
+      <GoBackButton location={location} backLink={backLink.current} />
       <MovieCard error={error} movie={movie} />
       {isLoading && <Loader />}
       <AdditionalInfo />

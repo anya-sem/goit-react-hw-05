@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Search from "../components/Search/Search";
-// import SearchResults from "../components/SearchResults/SearchResults";
 import MoviesList from "../components/MoviesList/MoviesList";
 import { getSearchResults } from "../apiService/api";
 import { Toaster } from "react-hot-toast";
 import Loader from "../components/Loader/Loader";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
@@ -14,21 +14,35 @@ export default function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const onHandleSubmit = (value) => {
-    setQuery(value);
-    setResults([]);
-    setError(false);
+  const handleChange = (newQuery) => {
+    setQuery(newQuery);
+  };
+
+  const onSubmit = () => {
+    if (!query.trim()) {
+      toast.error("Please, enter your request");
+      return;
+    }
+
+    searchParams.set("query", query);
+    setSearchParams(searchParams);
+
+    setQuery("");
   };
 
   useEffect(() => {
-    if (!query) return;
-    setIsLoading(true);
+    const fetchResults = async () => {
+      const queryFromParams = searchParams.get("query");
 
-    const searchMovies = async () => {
+      if (!queryFromParams) return;
+
+      setIsLoading(true);
       try {
-        const fetchedResults = await getSearchResults(query);
+        const fetchedResults = await getSearchResults(queryFromParams);
         setResults(fetchedResults.results);
+        setError(false);
       } catch (error) {
         setError(true);
       } finally {
@@ -36,13 +50,13 @@ export default function MoviesPage() {
       }
     };
 
-    searchMovies();
-  }, [query]);
+    fetchResults();
+  }, [searchParams]);
 
   return (
     <div>
       {isLoading && <Loader />}
-      <Search onSubmit={onHandleSubmit} />
+      <Search query={query} onSubmit={onSubmit} onChange={handleChange} />
       <Toaster />
       <MoviesList movies={results} error={error} location={location} />
     </div>
