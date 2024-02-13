@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export const Search = ({ onSubmit }) => {
+export default function Search({ onSubmit }) {
   const [query, setQuery] = useState("");
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,4 +44,4 @@ export const Search = ({ onSubmit }) => {
       </header>
     </div>
   );
-};
+}

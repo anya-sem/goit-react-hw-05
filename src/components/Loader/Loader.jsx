@@ -1,6 +1,6 @@
 import { ThreeDots } from "react-loader-spinner";
 
-export const Loader = () => {
+export default function Loader() {
   const style = {
     position: "fixed",
     top: "50%",
@@ -21,4 +21,4 @@ export const Loader = () => {
       />
     </div>
   );
-};
+}

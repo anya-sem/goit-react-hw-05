@@ -1,5 +1,5 @@
-import { Trending } from "../components/Trending/Trending";
-import { Loader } from "../components/Loader/Loader";
+import MoviesList from "../components/MoviesList/MoviesList";
+import Loader from "../components/Loader/Loader";
 import React, { useEffect, useState } from "react";
 import { getTrending } from "../apiService/api";
 import { useLocation } from "react-router-dom";
@@ -28,7 +28,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <Trending error={error} trending={trending} location={location} />
+      <h1>Trending today</h1>
+      <MoviesList error={error} movies={trending} location={location} />
       {isLoading && <Loader />}
     </div>
   );

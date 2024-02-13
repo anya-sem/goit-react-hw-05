@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getReviews } from "../../apiService/api";
-import { Loader } from "../Loader/Loader";
+import Loader from "../Loader/Loader";
 import { useParams } from "react-router-dom";
 
-export const MovieReviews = () => {
+export default function MovieReviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
   const [error, setError] = useState(false);
@@ -48,7 +48,7 @@ export const MovieReviews = () => {
       )}
     </div>
   );
-};
+}
 
 // {
 //   "id": 550,

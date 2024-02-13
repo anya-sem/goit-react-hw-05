@@ -1,4 +1,4 @@
-export const MovieCard = ({ movie }) => {
+export default function MovieCard({ movie }) {
   return (
     <div>
       {movie && (
@@ -29,7 +29,7 @@ export const MovieCard = ({ movie }) => {
       )}
     </div>
   );
-};
+}
 
 // {
 //   "adult": false,

@@ -1,9 +1,9 @@
-import { MovieCard } from "../components/MovieCard/MovieCard";
-import { Loader } from "../components/Loader/Loader";
+import MovieCard from "../components/MovieCard/MovieCard";
+import Loader from "../components/Loader/Loader";
 import { useEffect, useState } from "react";
 import { getMovieById, getReviews } from "../apiService/api";
 import { useParams, Outlet, useLocation } from "react-router-dom";
-import { AdditionalInfo } from "../components/AdditionalInfo/AdditionalInfo";
+import AdditionalInfo from "../components/AdditionalInfo/AdditionalInfo";
 import GoBackButton from "../components/GoBackButton/GoBackButton";
 
 export default function MovieDetailsPage() {

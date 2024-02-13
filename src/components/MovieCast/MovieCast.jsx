@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getCast } from "../../apiService/api";
-import { Loader } from "../Loader/Loader";
+import Loader from "../Loader/Loader";
 import { useParams } from "react-router-dom";
 
-export const MovieCast = () => {
+export default function MovieCast() {
   const { movieId } = useParams();
 
   const [cast, setCast] = useState(null);
@@ -51,7 +51,7 @@ export const MovieCast = () => {
       )}
     </div>
   );
-};
+}
 
 // "id": 550,
 // "cast": [

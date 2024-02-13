@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Search } from "../components/Search/Search";
-import { SearchResults } from "../components/SearchResults/SearchResults";
+import Search from "../components/Search/Search";
+// import SearchResults from "../components/SearchResults/SearchResults";
+import MoviesList from "../components/MoviesList/MoviesList";
 import { getSearchResults } from "../apiService/api";
 import { Toaster } from "react-hot-toast";
-import { Loader } from "../components/Loader/Loader";
+import Loader from "../components/Loader/Loader";
 import { useLocation } from "react-router-dom";
 
 export default function MoviesPage() {
@@ -43,7 +44,7 @@ export default function MoviesPage() {
       {isLoading && <Loader />}
       <Search onSubmit={onHandleSubmit} />
       <Toaster />
-      <SearchResults results={results} error={error} location={location} />
+      <MoviesList movies={results} error={error} location={location} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const AdditionalInfo = () => {
+export default function AdditionalInfo() {
   return (
     <div>
       <h2>Additional Information</h2>
@@ -14,4 +14,4 @@ export const AdditionalInfo = () => {
       </ul>
     </div>
   );
-};
+}
