@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export const Trending = ({ error, trending }) => {
+export const Trending = ({ error, trending, location }) => {
   return (
     <div>
       <h1>Trending today</h1>
@@ -11,7 +11,7 @@ export const Trending = ({ error, trending }) => {
           {trending.length > 0 &&
             trending.map(({ id, title, poster_path, vote_average }) => (
               <li key={id}>
-                <NavLink to={`/movie/${id}`}>
+                <NavLink to={`/movies/${id}`} state={location}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                     alt={title}

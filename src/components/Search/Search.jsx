@@ -1,12 +1,18 @@
 // import css from "./Search.module.css";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const Search = ({ onSubmit }) => {
   const [query, setQuery] = useState("");
 
-  const handleChange = ({ target: { value } }) => {
-    setQuery(value);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("query") ?? "";
+
+  const handleChange = (newQuery) => {
+    setQuery(newQuery);
+    searchParams.set("query", newQuery);
+    setSearchParams(searchParams);
   };
 
   const handleSubmit = (e) => {
@@ -16,8 +22,10 @@ export const Search = ({ onSubmit }) => {
       return;
     }
     onSubmit(query);
+    setSearchParams({ query: query });
     setQuery("");
   };
+
   return (
     <div>
       <header>
@@ -28,7 +36,8 @@ export const Search = ({ onSubmit }) => {
             autoFocus
             placeholder="Search movie"
             name="query"
-            onChange={handleChange}
+            value={query}
+            onChange={(evt) => handleChange(evt.target.value)}
           />
           <button type="submit">Search</button>
         </form>

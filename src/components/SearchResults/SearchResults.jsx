@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export const SearchResults = ({ results, error }) => {
+export const SearchResults = ({ results, error, location }) => {
   return (
     <div>
       {error ? (
@@ -13,7 +13,7 @@ export const SearchResults = ({ results, error }) => {
             <ul>
               {results.map(({ id, title, poster_path, vote_average }) => (
                 <li key={id}>
-                  <NavLink to={`/movies/${id}`}>
+                  <NavLink to={`/movies/${id}`} state={location}>
                     <img
                       src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                       alt={title}

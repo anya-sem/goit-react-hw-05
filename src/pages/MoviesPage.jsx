@@ -4,12 +4,15 @@ import { SearchResults } from "../components/SearchResults/SearchResults";
 import { getSearchResults } from "../apiService/api";
 import { Toaster } from "react-hot-toast";
 import { Loader } from "../components/Loader/Loader";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const location = useLocation();
 
   const onHandleSubmit = (value) => {
     setQuery(value);
@@ -40,7 +43,7 @@ export default function MoviesPage() {
       {isLoading && <Loader />}
       <Search onSubmit={onHandleSubmit} />
       <Toaster />
-      <SearchResults results={results} error={error} />
+      <SearchResults results={results} error={error} location={location} />
     </div>
   );
 }
