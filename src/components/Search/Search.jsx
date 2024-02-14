@@ -1,3 +1,4 @@
+import css from "./Search.module.css";
 export default function Search({ query, onSubmit, onChange }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -7,7 +8,7 @@ export default function Search({ query, onSubmit, onChange }) {
   return (
     <div>
       <header>
-        <form onSubmit={handleSubmit}>
+        <form className={css.form} onSubmit={handleSubmit}>
           <input
             type="text"
             autoComplete="off"
@@ -16,8 +17,11 @@ export default function Search({ query, onSubmit, onChange }) {
             name="query"
             value={query}
             onChange={(evt) => onChange(evt.target.value)}
+            className={css.input}
           />
-          <button type="submit">Search</button>
+          <button className={css.button} type="submit">
+            Search
+          </button>
         </form>
       </header>
     </div>

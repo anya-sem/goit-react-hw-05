@@ -3,6 +3,7 @@ import Loader from "../components/Loader/Loader";
 import React, { useEffect, useState } from "react";
 import { getTrending } from "../apiService/api";
 import { useLocation } from "react-router-dom";
+import css from "../components/MoviesList/MoviesList.module.css";
 
 export default function HomePage() {
   const [trending, setTrending] = useState([]);
@@ -28,7 +29,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1>Trending today</h1>
+      <h1 className={css.title}>Trending today</h1>
       <MoviesList error={error} movies={trending} location={location} />
       {isLoading && <Loader />}
     </div>

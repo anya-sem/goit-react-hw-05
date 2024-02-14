@@ -5,6 +5,7 @@ import { getMovieById, getReviews } from "../apiService/api";
 import { useParams, Outlet, useLocation } from "react-router-dom";
 import AdditionalInfo from "../components/AdditionalInfo/AdditionalInfo";
 import GoBackButton from "../components/GoBackButton/GoBackButton";
+import css from "../components/MovieCard/MovieCard.module.css";
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -36,8 +37,10 @@ export default function MovieDetailsPage() {
 
   return (
     <div>
-      <GoBackButton location={location} backLink={backLink.current} />
-      <MovieCard error={error} movie={movie} />
+      <div className={css.btnWrap}>
+        <GoBackButton location={location} backLink={backLink.current} />
+        <MovieCard error={error} movie={movie} />
+      </div>
       {isLoading && <Loader />}
       <AdditionalInfo />
       <Outlet />

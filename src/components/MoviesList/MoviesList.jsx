@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import css from "./MoviesList.module.css";
 
 export default function MoviesList({ error, movies, location }) {
   const defaultImg =
@@ -8,10 +9,10 @@ export default function MoviesList({ error, movies, location }) {
       {error ? (
         <p>Error fetching data</p>
       ) : (
-        <ul>
+        <ul className={css.list}>
           {movies.length > 0 &&
             movies.map(({ id, title, poster_path, vote_average }) => (
-              <li key={id}>
+              <li key={id} className={css.card}>
                 <NavLink to={`/movies/${id}`} state={{ from: location }}>
                   <img
                     src={
@@ -21,9 +22,12 @@ export default function MoviesList({ error, movies, location }) {
                     }
                     alt={title}
                     width={200}
+                    className={css.img}
                   />
-                  <p>{title}</p>
-                  <p>Rate: {vote_average}</p>
+                  <div className={css.text}>
+                    <p className={css.movieTitle}>{title}</p>
+                    <p>Rate: {vote_average}</p>
+                  </div>
                 </NavLink>
               </li>
             ))}
